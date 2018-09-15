@@ -15,20 +15,20 @@ func GetGoEnv() string {
 	return "development"
 }
 
-// IsDevEnv indicates if app is in dev env
-func IsDevEnv() bool {
+// IsDev indicates if app is in dev env
+func IsDev() bool {
 	return GetGoEnv() == "development"
 }
 
-// IsProdEnv indicates if app is in prod env
-func isProdEnv() bool {
+// IsProd indicates if app is in prod env
+func isProd() bool {
 	return GetGoEnv() == "production"
 }
 
 // GetPort returns an appropriate port for http.ListenAndServe to use
 func GetPort() string {
-	var defaultPort = "3000"
-	var isDev = IsDevEnv()
+	defaultPort := "3000"
+	isDev := IsDev()
 
 	port, isSet := os.LookupEnv("PORT")
 	if !isSet {
