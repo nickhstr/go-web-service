@@ -2,8 +2,8 @@
 FROM golang:1.11@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaadf96f081
 
 WORKDIR /app
-COPY . /app
-RUN CGO_ENABLED=0 go build -o /app/bin/go-web-service /app/main.go
+COPY ./ ./
+RUN CGO_ENABLED=0 go build -o ./bin/go-web-service ./main.go
 
 # Stage 2 - Run app
 FROM alpine
