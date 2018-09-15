@@ -6,7 +6,7 @@ COPY ./ ./
 RUN CGO_ENABLED=0 go build -o ./bin/go-web-service ./main.go
 
 # Stage 2 - Run app
-FROM alpine
+FROM alpine@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
 
 COPY --from=0 /app/bin/go-web-service go-web-service
 ENV GO_ENV=production \
