@@ -2,9 +2,7 @@ package routes
 
 import (
 	"net/http"
-	"os"
 
-	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	mh "github.com/nickhstr/go-web-service/middleware/handlers"
 )
@@ -19,9 +17,6 @@ func NewRouter() *mux.Router {
 
 		// Add our own logger middleware
 		handler = mh.Logger(handler, route.Name)
-
-		// Add gorilla logging
-		handler = handlers.LoggingHandler(os.Stdout, handler)
 
 		router.
 			Methods(route.Method).
