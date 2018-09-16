@@ -11,9 +11,9 @@ This provides boilerplate code for a Go web service.
 In a directory outside of the `$GOPATH/src` tree:
 
 ```sh
-git clone https://github.com/nickhstr/go-web-service.git
-cd go-web-service
-go get
+$ git clone https://github.com/nickhstr/go-web-service.git
+$ cd go-web-service
+$ go get
 ```
 
 ## Usage
