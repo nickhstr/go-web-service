@@ -206,5 +206,6 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/go,linux,macos,windows,jetbrains,sublimetext,visualstudiocode
 
 # go-web-service
+bin
 .env
 go-web-service
