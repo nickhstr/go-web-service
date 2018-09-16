@@ -22,18 +22,38 @@ $ go get
 
 For local development, create a `.env` file at the project's root, with the `PORT` variable set to whatever port you desire, otherwise it defaults to 3000.
 
-Ex: 
+Ex:
+
 ```txt
 PORT=8080
 ```
 
-To start the server, run either `make dev` or `go run main.go`.
+To start the server:
+
+```sh
+$ make dev
+```
+
+or
+
+```sh
+$ go run main.go
+```
 
 ### Production
 
-Ideally, docker would handle production builds. But to run the app in production mode locally, execute `make serve`. That builds and serves the app. Be sure to specify the `PORT` in the command.
+Ideally, docker would handle production builds.
+
+But to run the app in production mode locally:
+
+```sh
+$ make serve
+```
+
+That builds and serves the app. Be sure to specify the `PORT` in the command.
 
 Ex:
+
 ```sh
 $ PORT=80 make serve
 ```
