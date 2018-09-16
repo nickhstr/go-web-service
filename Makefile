@@ -5,7 +5,8 @@ clean:
 	rm -rf ./bin
 
 coverage:
-	go test -cover ./...
+	go test -coverprofile=coverage.out ./...
+	go tool cover -html=coverage.out
 
 dev:
 	go run main.go
