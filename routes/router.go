@@ -3,6 +3,7 @@ package routes
 import (
 	"net/http"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	mh "github.com/nickhstr/go-web-service/middleware/handlers"
 )
@@ -14,6 +15,9 @@ func NewRouter() *mux.Router {
 	for _, route := range Routes {
 		var handler http.Handler
 		handler = route.HandlerFunc
+
+		// Compression middleware
+		handler = handlers.CompressHandler(handler)
 
 		// Add our own logger middleware
 		handler = mh.Logger(handler, route.Name)
