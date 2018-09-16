@@ -12,7 +12,7 @@ dev:
 	go run main.go
 
 serve: build
-	./bin/go-web-service
+	GO_ENV=production ./bin/go-web-service
 
 test:
 	go test -v ./...
