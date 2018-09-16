@@ -4,10 +4,9 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-)
 
-var success = "\u2713"
-var failure = "\u2714"
+	"github.com/nickhstr/go-web-service/utils/test"
+)
 
 func TestIndex(t *testing.T) {
 	respRec := httptest.NewRecorder()
@@ -25,15 +24,15 @@ func TestIndex(t *testing.T) {
 			handler.ServeHTTP(respRec, req)
 
 			if status := respRec.Code; status != http.StatusOK {
-				t.Fatalf("\t%s\tThe status code should be %v", failure, http.StatusOK)
+				t.Fatalf("\t%s\tThe status code should be %v", test.FAILURE, http.StatusOK)
 			}
-			t.Logf("\t%s\tThe status code should be %v", success, http.StatusOK)
+			t.Logf("\t%s\tThe status code should be %v", test.SUCCESS, http.StatusOK)
 
 			expectedBody := "Hello World!"
 			if body := respRec.Body.String(); body != expectedBody {
-				t.Logf("\t%s\tThe body should match '%s'", failure, expectedBody)
+				t.Logf("\t%s\tThe body should match '%s'", test.FAILURE, expectedBody)
 			}
-			t.Logf("\t%s\tThe body should match '%s'", success, expectedBody)
+			t.Logf("\t%s\tThe body should match '%s'", test.SUCCESS, expectedBody)
 		}
 	}
 }
