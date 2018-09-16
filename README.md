@@ -2,13 +2,19 @@
 This provides boilerplate code for a Go web service.
 
 ## Prerequisites
-Go 1.11 or higher
-make
-docker
+- Go 1.11 or higher ([Installation Instructions](www.google.com))
+- make
+- docker ([Installation Instructions](https://www.docker.com/get-started))
 
 ## Installation
-- `git clone https://github.com/nickhstr/go-web-service.git` in a directory outside of the `$GOPATH/src` tree, and `cd` to the project root
-- `go get`
+
+In a directory outside of the `$GOPATH/src` tree:
+
+```sh
+git clone https://github.com/nickhstr/go-web-service.git
+cd go-web-service
+go get
+```
 
 ## Usage
 
