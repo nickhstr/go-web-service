@@ -37,7 +37,7 @@ $ make dev
 or
 
 ```sh
-$ go run src/main.go
+$ go run main.go
 ```
 
 ### Production

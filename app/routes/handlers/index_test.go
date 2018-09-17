@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/nickhstr/go-web-service/src/utils/test"
+	"github.com/nickhstr/go-web-service/app/utils/test"
 )
 
 func TestIndex(t *testing.T) {

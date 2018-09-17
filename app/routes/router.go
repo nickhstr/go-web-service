@@ -5,7 +5,7 @@ import (
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	mh "github.com/nickhstr/go-web-service/src/middleware/handlers"
+	mh "github.com/nickhstr/go-web-service/app/middleware/handlers"
 )
 
 // NewRouter returns a mux router with all Routes registered.

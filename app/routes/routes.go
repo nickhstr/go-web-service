@@ -3,7 +3,7 @@ package routes
 import (
 	"net/http"
 
-	"github.com/nickhstr/go-web-service/src/routes/handlers"
+	"github.com/nickhstr/go-web-service/app/routes/handlers"
 )
 
 // Route defines the fundamental pieces of information

@@ -10,8 +10,7 @@ all: help
 .PHONY: build
 build:
 	@echo Building executable...
-	@go build -o bin/$(PROJECTNAME) src/main.go
-	@echo
+	@go build -o bin/$(PROJECTNAME) main.go
 	@echo Done
 
 ## clean: Removes build artifacts
@@ -38,7 +37,7 @@ coverage: create-coverage
 .PHONY: dev
 dev:
 	@echo Starting dev server...
-	@go run src/main.go
+	@go run main.go
 
 ## install: downloads all app dependencies
 .PHONY: install
