@@ -44,8 +44,7 @@ dev:
 .PHONY: install
 install:
 	@echo Installing package dependencies...
-	@go get
-	@go mod tidy
+	@go get ./...
 	@echo Done
 
 ## serve: Builds and runs the application in production mode
