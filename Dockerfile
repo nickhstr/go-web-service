@@ -3,7 +3,8 @@ FROM golang:1.11@sha256:e8e4c4406217b415c506815d38e3f8ac6e05d0121b19f686c5af7eaa
 
 WORKDIR /app
 COPY ./app ./app
-COPY ./go.mod \
+COPY ./main.go \
+    ./go.mod \
     ./go.sum \
     ./
 RUN CGO_ENABLED=0 go build -o ./bin/go-web-service ./main.go
