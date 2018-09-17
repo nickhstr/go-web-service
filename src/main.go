@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/joho/godotenv"
-	"github.com/nickhstr/go-web-service/routes"
-	"github.com/nickhstr/go-web-service/utils/env"
+	"github.com/nickhstr/go-web-service/src/routes"
+	"github.com/nickhstr/go-web-service/src/utils/env"
 )
 
 func main() {
