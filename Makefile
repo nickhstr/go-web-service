@@ -2,6 +2,7 @@
 # Every one of these commands can be ran using the 'go' tool.
 
 PROJECTNAME=$(shell basename "$(PWD)")
+APP_DEV_NAME="app-dev"
 
 # First target, is the default command run if 'make' is invoked without any targets
 all: help
@@ -11,6 +12,9 @@ all: help
 build:
 	@echo Building executable...
 	@go build -o bin/$(PROJECTNAME) main.go
+
+build-dev:
+	@go build -o bin/$(APP_DEV_NAME) main.go
 
 ## clean: Removes build artifacts
 .PHONY: clean
@@ -31,7 +35,7 @@ coverage: create-coverage
 
 ## dev: Starts the app in dev mode
 .PHONY: dev
-dev:
+dev: build-dev
 	@echo Starting dev server...
 	@modd
 
