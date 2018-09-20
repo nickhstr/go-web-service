@@ -11,27 +11,23 @@ all: help
 build:
 	@echo Building executable...
 	@go build -o bin/$(PROJECTNAME) main.go
-	@echo Done
 
 ## clean: Removes build artifacts
 .PHONY: clean
 clean:
 	@echo Removing build artifacts...
 	@rm -rf bin
-	@echo Done
 
 ## create-coverage: Outputs test coverage to 'coverage.out'
 .PHONY: create-coverage
 create-coverage:
 	@echo Running tests and creating coverage report...
-	@echo Done
 
 ## coverage: Runs tests and opens a browser window to visualize test coverage
 .PHONY: coverage
 coverage: create-coverage
 	@echo Opening coverage report in browser...
 	@go tool cover -html=coverage.out
-	@echo Done
 
 ## dev: Starts the app in dev mode
 .PHONY: dev
@@ -39,12 +35,11 @@ dev:
 	@echo Starting dev server...
 	@go run main.go
 
-## install: downloads all app dependencies
+## install: Downloads all app dependencies
 .PHONY: install
 install:
 	@echo Installing package dependencies...
 	@go get ./...
-	@echo Done
 
 ## serve: Builds and runs the application in production mode
 .PHONY: serve
@@ -56,7 +51,6 @@ serve: build
 test:
 	@echo Running all application tests...
 	@go test -v ./...
-	@echo Done
 
 print:
 	@echo $(PROJECTNAME)
