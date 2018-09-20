@@ -33,7 +33,7 @@ coverage: create-coverage
 .PHONY: dev
 dev:
 	@echo Starting dev server...
-	@go run main.go
+	@modd
 
 ## install: Downloads all app dependencies
 .PHONY: install
