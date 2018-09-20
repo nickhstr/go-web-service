@@ -52,9 +52,6 @@ test:
 	@echo Running all application tests...
 	@go test -v ./...
 
-print:
-	@echo $(PROJECTNAME)
-
 ## help: List available commands
 .PHONY: help
 help: Makefile
