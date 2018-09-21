@@ -20,6 +20,7 @@ clean:
 ## create-coverage: Outputs test coverage to 'coverage.out'
 create-coverage:
 	@echo "> Running tests and creating coverage report..."
+	@go test -coverprofile=coverage.out ./...
 
 ## coverage: Runs tests and opens a browser window to visualize test coverage
 coverage: create-coverage
