@@ -21,7 +21,7 @@ func main() {
 	router := routes.NewRouter()
 
 	init := func() error {
-		fmt.Printf("Listening on port %s in %s mode\n", PORT, env.Get("GO_ENV", "development"))
+		fmt.Printf("Listening on %s in %s mode\n", PORT, env.Get("GO_ENV", "development"))
 		return http.ListenAndServe(PORT, router)
 	}
 
