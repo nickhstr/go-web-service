@@ -5,24 +5,25 @@ import (
 	"os"
 )
 
-// GetGoEnv returns the GO_ENV value, if set.
-// Otherwise, it returns the default value.
-func GetGoEnv() string {
-	if goEnv, isSet := os.LookupEnv("GO_ENV"); isSet {
-		return goEnv
+// Get provides a way to get the value of a supplied environment
+// variable. If it is not found, the optionally supplied default
+// value is returned.
+func Get(envVar string, defaultVal string) string {
+	if val, isSet := os.LookupEnv(envVar); isSet {
+		return val
 	}
 
-	return "development"
+	return defaultVal
 }
 
 // IsDev indicates if app is in dev env.
 func IsDev() bool {
-	return GetGoEnv() == "development"
+	return Get("GO_ENV", "development") == "development"
 }
 
 // IsProd indicates if app is in prod env.
 func isProd() bool {
-	return GetGoEnv() == "production"
+	return Get("GO_ENV", "development") == "production"
 }
 
 // GetPort returns an appropriate port for http.ListenAndServe to use.
