@@ -20,10 +20,10 @@ func main() {
 	PORT := env.GetPort()
 	router := routes.NewRouter()
 
-	init := func() error {
+	initApp := func() error {
 		fmt.Printf("Listening on %s in %s mode\n", PORT, env.Get("GO_ENV", "development"))
 		return http.ListenAndServe(PORT, router)
 	}
 
-	log.Fatal(init())
+	log.Fatal(initApp())
 }
