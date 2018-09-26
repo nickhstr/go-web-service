@@ -9,7 +9,7 @@ import (
 
 // Compression middleware compresses all handler outputs
 func Compression(handler http.Handler) http.Handler {
-	if env.IsProd() {
+	if env.Get("COMPRESSION") == "true" {
 		// Add gorilla compression middleware
 		handler = handlers.CompressHandler(handler)
 	}

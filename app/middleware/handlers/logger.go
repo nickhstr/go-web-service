@@ -16,7 +16,7 @@ func Logger(handler http.Handler, name string) http.Handler {
 		handler = logHandler(handler, name)
 	}
 	// Add gorilla logging
-	handler = handlers.LoggingHandler(os.Stdout, handler)
+	handler = handlers.CombinedLoggingHandler(os.Stdout, handler)
 
 	return handler
 }
