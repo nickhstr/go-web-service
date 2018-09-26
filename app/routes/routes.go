@@ -23,4 +23,10 @@ var Routes = []Route{
 		"/",
 		handlers.Index,
 	},
+	Route{
+		"Health",
+		"GET",
+		"/health",
+		handlers.Health,
+	},
 }
