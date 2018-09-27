@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/joho/godotenv"
-	"github.com/nickhstr/go-web-service/app/routes"
+	"github.com/nickhstr/go-web-service/app/router"
 	"github.com/nickhstr/go-web-service/app/utils/env"
 )
 
@@ -18,7 +18,7 @@ func main() {
 	}
 
 	PORT := env.GetPort()
-	router := routes.NewRouter()
+	router := router.New()
 
 	initApp := func() error {
 		fmt.Printf("Listening on %s in %s mode\n", PORT, env.Get("GO_ENV", "development"))

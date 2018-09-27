@@ -5,12 +5,14 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/nickhstr/go-web-service/app/routes/handlers"
+	"github.com/julienschmidt/httprouter"
+	"github.com/nickhstr/go-web-service/app/router/handlers"
 	"github.com/nickhstr/go-web-service/app/utils/test"
 )
 
 func TestIndex(t *testing.T) {
 	respRec := httptest.NewRecorder()
+	router := httprouter.New()
 
 	tests := []struct {
 		method     string
@@ -25,13 +27,13 @@ func TestIndex(t *testing.T) {
 		for i, tt := range tests {
 			t.Logf("\tTest %d: When making a %s request to '%s'", i, tt.method, tt.url)
 			{
-				handler := http.HandlerFunc(handlers.Index)
+				router.GET("/", handlers.Index)
 				req, err := http.NewRequest(tt.method, tt.url, nil)
 				if err != nil {
 					t.Fatal(err)
 				}
 
-				handler.ServeHTTP(respRec, req)
+				router.ServeHTTP(respRec, req)
 
 				if status := respRec.Code; status != http.StatusOK {
 					t.Fatalf("\t%s\tThe status code should be %v", test.FAILURE, http.StatusOK)
