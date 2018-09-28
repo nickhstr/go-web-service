@@ -52,7 +52,9 @@ serve: build
 .PHONY: test
 test:
 	@echo "> Running all application tests..."
-	@go test -v ./...
+	@go test -coverprofile=coverage.out ./...
+	@echo Coverage:
+	@go tool cover -func=coverage.out
 
 ## help: List available commands
 .PHONY: help
