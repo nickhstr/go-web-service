@@ -3,20 +3,16 @@ package middleware
 import (
 	"log"
 	"net/http"
-	"os"
 	"time"
 
-	"github.com/gorilla/handlers"
 	"github.com/nickhstr/go-web-service/app/utils/env"
 )
 
 // Logger outputs general information about requests.
 func Logger(handler http.Handler) http.Handler {
-	if env.IsDev() {
+	if env.Get("LOGGING", "true") == "true" {
 		handler = logHandler(handler)
 	}
-	// Add gorilla logging
-	handler = handlers.CombinedLoggingHandler(os.Stdout, handler)
 
 	return handler
 }
