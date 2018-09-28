@@ -14,7 +14,5 @@ func Compression(handler http.Handler) http.Handler {
 		handler = handlers.CompressHandler(handler)
 	}
 
-	handler = handlers.CompressHandler(handler)
-
 	return handler
 }
