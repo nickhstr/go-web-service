@@ -13,8 +13,6 @@ func New() http.Handler {
 	baseRouter := httprouter.New()
 
 	for _, route := range Routes {
-		// var handler httprouter.Handle
-
 		baseRouter.Handle(route.Method, route.Path, route.Handler)
 	}
 
