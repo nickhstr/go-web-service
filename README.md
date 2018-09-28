@@ -12,8 +12,8 @@ Get up and running quickly with a Go web service.
 In a directory outside of the `$GOPATH/src` tree:
 
 ```sh
-~/go-web-service$ git clone https://github.com/nickhstr/go-web-service.git
-~/go-web-service$ cd go-web-service
+~$ git clone https://github.com/nickhstr/go-web-service.git
+~$ cd go-web-service
 ~/go-web-service$ make install
 ```
 
