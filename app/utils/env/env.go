@@ -30,8 +30,8 @@ func IsProd() bool {
 	return Get("GO_ENV", "development") == "production"
 }
 
-// GetPort returns an appropriate port for http.ListenAndServe to use.
-func GetPort() string {
+// GetAddr returns an appropriate address for http.ListenAndServe to use.
+func GetAddr() string {
 	isDev := IsDev()
 
 	port := Get("PORT", "3000")
@@ -40,5 +40,5 @@ func GetPort() string {
 		return fmt.Sprintf("localhost:%s", port)
 	}
 
-	return fmt.Sprintf(":%s", port)
+	return fmt.Sprintf("0.0.0.0:%s", port)
 }
