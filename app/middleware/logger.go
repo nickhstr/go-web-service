@@ -3,8 +3,10 @@ package middleware
 import (
 	"log"
 	"net/http"
+	"os"
 	"time"
 
+	"github.com/gorilla/handlers"
 	"github.com/nickhstr/go-web-service/app/utils/env"
 )
 
@@ -18,6 +20,12 @@ func Logger(handler http.Handler) http.Handler {
 }
 
 func logHandler(handler http.Handler) http.Handler {
+	handler = handlers.CombinedLoggingHandler(os.Stdout, handler)
+
+	if env.IsProd() {
+		return handler
+	}
+
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 
