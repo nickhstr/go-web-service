@@ -21,7 +21,7 @@ func New() http.Handler {
 		baseRouter.Handler(route.Method, route.Path, handler)
 	}
 
-	// Add middleware for all requsts
+	// Add middleware for all requests
 	router = middleware.Compose(
 		baseRouter,
 		middleware.Logger,
