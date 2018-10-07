@@ -1,7 +1,8 @@
 package router
 
 import (
-	"github.com/julienschmidt/httprouter"
+	"net/http"
+
 	"github.com/nickhstr/go-web-service/app/router/handlers"
 )
 
@@ -10,7 +11,7 @@ import (
 type Route struct {
 	Method  string
 	Path    string
-	Handler httprouter.Handle
+	Handler http.HandlerFunc
 }
 
 // Routes registers all routes for the router

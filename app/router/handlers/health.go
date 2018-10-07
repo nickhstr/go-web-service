@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/julienschmidt/httprouter"
 	"github.com/nickhstr/go-web-service/app/types"
 	"github.com/nickhstr/go-web-service/app/utils"
 )
@@ -16,7 +15,7 @@ type HealthInfo struct {
 }
 
 // Health reports general information about the service
-func Health(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func Health(w http.ResponseWriter, r *http.Request) {
 	var (
 		res           []byte
 		err           error
