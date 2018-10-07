@@ -37,9 +37,14 @@ dev:
 	@echo "> Starting dev server..."
 	@modd
 
+.PHONY: install-dev
+install-dev:
+	@echo "> Installing dev dependencies..."
+	@go run dev/install.go
+
 ## install: Downloads all app dependencies
 .PHONY: install
-install:
+install: install-dev
 	@echo "> Installing package dependencies..."
 	@go get ./...
 	@go mod tidy

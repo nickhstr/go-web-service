@@ -1,3 +1,7 @@
+// This install script downloads and installs Go tools useful for
+// development, as listed in the "devDeps.json" file at the project root.
+// Because these tools are expected to run on the command line, they
+// are installed relative to the GOPATH, and not versioned by Go modules.
 package main
 
 import (
@@ -11,7 +15,7 @@ import (
 // DevDeps defines the struct for unmarshalling dev
 // dependencies data
 type DevDeps struct {
-	Dependencies map[string]string `json:"devDependencies"`
+	Dependencies []string `json:"devDependencies"`
 }
 
 func main() {
@@ -37,7 +41,6 @@ func main() {
 	}
 
 	for _, url := range devDeps.Dependencies {
-		fmt.Printf("Installing %s\n", url)
 		cmd := exec.Command(cmdPath, "get", url)
 		cmd.Env = os.Environ()
 		cmd.Env = append(cmd.Env, "GO111MODULE=off")
