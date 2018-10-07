@@ -8,17 +8,45 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"time"
 )
 
-// AppName returns the application's name.
+// AppInfo provides general information about the app
+type AppInfo struct {
+	name      string
+	startTime time.Time
+}
+
+// Name returns the app's name
+func (a *AppInfo) Name() string {
+	return a.name
+}
+
+// Uptime returns the amount to time in seconds that the app
+// has been running
+func (a *AppInfo) Uptime() float64 {
+	return time.Since(a.startTime).Seconds()
+}
+
+// App provides access to general app info
+var App AppInfo
+
+func init() {
+	App = AppInfo{
+		name:      getAppName(),
+		startTime: time.Now(),
+	}
+}
+
+// getAppName returns the application's name.
 // The application name can be set as an environment variable,
 // or it can be read from the go.mod file.
-func AppName() string {
+func getAppName() string {
 	if appName, isSet := os.LookupEnv("APP_NAME"); isSet {
 		return appName
 	}
 
-	name, err := getAppName()
+	name, err := getModuleAppName()
 	if err != nil {
 		name = "web-service"
 	}
@@ -30,7 +58,7 @@ func AppName() string {
 	return name
 }
 
-func getAppName() (string, error) {
+func getModuleAppName() (string, error) {
 	var name string
 
 	modFile, err := os.Open("./go.mod")

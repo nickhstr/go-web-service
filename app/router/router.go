@@ -18,6 +18,7 @@ func New() http.Handler {
 
 	router = middleware.Compose(
 		baseRouter,
+		middleware.Transaction,
 		middleware.Logger,
 		middleware.Compression,
 	)
