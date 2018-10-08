@@ -14,7 +14,8 @@ func New() http.Handler {
 
 	// Register routes with router
 	for _, route := range Routes {
-		handler := http.HandlerFunc(route.Handler)
+		var handler http.Handler
+		handler = route.Handler
 
 		// Middleware can also be included here, on a per-route-basis
 
