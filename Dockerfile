@@ -1,5 +1,5 @@
 # Stage 1 - Build app
-FROM golang:1.11@sha256:63ec0e29aeba39c0fe2fc6551c9ca7fa16ddf95394d77ccee75bc7062526a96c
+FROM golang:1.11.1@sha256:63ec0e29aeba39c0fe2fc6551c9ca7fa16ddf95394d77ccee75bc7062526a96c
 
 WORKDIR /app
 COPY ./app ./app
