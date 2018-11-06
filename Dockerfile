@@ -1,5 +1,8 @@
 # Stage 1 - Build app
-FROM golang:1.11.1@sha256:63ec0e29aeba39c0fe2fc6551c9ca7fa16ddf95394d77ccee75bc7062526a96c
+FROM golang:1.11.2@sha256:e7462ca504afc789d289f2bb5fd471815cc11833439d2fe4e61915b190045359
+
+# Install git
+RUN apk update && apk add git
 
 WORKDIR /app
 COPY ./app ./app
