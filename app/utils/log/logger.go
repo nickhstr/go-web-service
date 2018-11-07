@@ -6,6 +6,24 @@ import (
 )
 
 func init() {
+	formatter := jsonFormatter()
+	log.SetFormatter(formatter)
+}
+
+func jsonFormatter() *log.JSONFormatter {
+	formatter := &log.JSONFormatter{
+		TimestampFormat: "2006-01-02 15:04:05",
+	}
+
+	if !env.IsProd() {
+		formatter.PrettyPrint = true
+	}
+
+	return formatter
+}
+
+// Leaving this here as another option
+func textFormatter() *log.TextFormatter {
 	formatter := &log.TextFormatter{
 		FullTimestamp:   true,
 		TimestampFormat: "2006-01-02 15:04:05",
@@ -16,5 +34,5 @@ func init() {
 		formatter.DisableLevelTruncation = true
 	}
 
-	log.SetFormatter(formatter)
+	return formatter
 }
