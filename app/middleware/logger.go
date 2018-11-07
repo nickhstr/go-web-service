@@ -31,13 +31,6 @@ func logHandler(handler http.Handler) http.Handler {
 
 		handler.ServeHTTP(w, r)
 
-		// log.Printf(
-		// 	"%s %s %s",
-		// 	r.Method,
-		// 	r.RequestURI,
-		// 	time.Since(start),
-		// )
-
 		log.WithFields(log.Fields{
 			"method": r.Method,
 			"url":    r.RequestURI,
