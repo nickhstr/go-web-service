@@ -1,13 +1,13 @@
 package middleware
 
 import (
-	"log"
 	"net/http"
 	"os"
 	"time"
 
 	"github.com/gorilla/handlers"
 	"github.com/nickhstr/go-web-service/app/utils/env"
+	log "github.com/sirupsen/logrus"
 )
 
 // Logger outputs general information about requests.
@@ -31,11 +31,17 @@ func logHandler(handler http.Handler) http.Handler {
 
 		handler.ServeHTTP(w, r)
 
-		log.Printf(
-			"%s %s %s",
-			r.Method,
-			r.RequestURI,
-			time.Since(start),
-		)
+		// log.Printf(
+		// 	"%s %s %s",
+		// 	r.Method,
+		// 	r.RequestURI,
+		// 	time.Since(start),
+		// )
+
+		log.WithFields(log.Fields{
+			"method": r.Method,
+			"url":    r.RequestURI,
+			"time":   time.Since(start),
+		}).Info()
 	})
 }

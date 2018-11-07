@@ -4,11 +4,12 @@ import (
 	"bufio"
 	"errors"
 	"io"
-	"log"
 	"os"
 	"regexp"
 	"strings"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 // AppInfo provides general information about the app

@@ -2,12 +2,14 @@ package app
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/joho/godotenv"
 	"github.com/nickhstr/go-web-service/app/router"
 	"github.com/nickhstr/go-web-service/app/utils/env"
+	log "github.com/sirupsen/logrus"
+	// Setup for logging is done in an init
+	_ "github.com/nickhstr/go-web-service/app/utils/log"
 )
 
 // Init initializes the server.
