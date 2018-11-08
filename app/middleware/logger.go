@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -42,7 +43,7 @@ func logHandler(handler http.Handler) http.Handler {
 			"url":           r.RequestURI,
 			"host":          r.Host,
 			"headers":       r.Header,
-			"response-time": time.Since(start),
+			"response-time": fmt.Sprintf("%v", time.Since(start)),
 			"status":        rw.status,
 			"app-name":      utils.App.Name(),
 		}).Info()
