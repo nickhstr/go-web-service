@@ -9,7 +9,7 @@ import (
 
 func main() {
 	mux := middleware.Create(middleware.Config{
-		AppName: env.AppName("ms-translations"),
+		AppName: env.AppName(),
 		AppVersion: "1.0.0",
 		GitRevision: "abc123",
 		Handler: routes.Handler(),
