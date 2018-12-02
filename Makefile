@@ -1,8 +1,4 @@
-# The commands listed here merely serve as a convenience.
-# Every one of these commands can be ran using the 'go' tool.
-
 PROJECTNAME=$(shell basename "$(PWD)")
-APP_DEV_NAME="app-dev"
 
 # First target, is the default command run if 'make' is invoked without any targets
 all: help
@@ -10,57 +6,63 @@ all: help
 ## build: Uses 'go build' to create the application executable, found in the 'bin' directory
 .PHONY: build
 build:
-	@echo "> Building executable..."
+	@echo "🛠️  Building executable..."
 	@go build -o bin/$(PROJECTNAME) main.go
+	@echo "👍 Done."
 
 ## clean: Removes build artifacts
 .PHONY: clean
 clean:
-	@echo "> Removing build artifacts..."
+	@echo "🔥 Removing build artifacts..."
 	@rm -rf bin
+	@echo "✨ Done."
+
+## coverage: Runs tests and reports coverage
+.PHONY: coverage
+coverage: create-coverage
+	@echo "=============================== Coverage Summary ==============================="
+	@go tool cover -func=coverage.out
+	@echo "================================================================================"
+
+## coverage-html: Runs tests and opens a browser window to visualize test coverage
+.PHONY: coverage-html
+coverage-html: create-coverage
+	@echo "🛠  Opening coverage report in browser..."
+	@go tool cover -html=coverage.out
+	@echo "👍 Done."
 
 ## create-coverage: Outputs test coverage to 'coverage.out'
 .PHONY: create-coverage
 create-coverage:
-	@echo "> Running tests and creating coverage report..."
-	@go test -coverprofile=coverage.out ./...
-
-## coverage: Runs tests and opens a browser window to visualize test coverage
-.PHONY: coverage
-coverage: create-coverage
-	@echo "> Opening coverage report in browser..."
-	@go tool cover -html=coverage.out
+	@echo "🏃 Running tests and creating coverage report..."
+	@GO_ENV=test go test -race -coverprofile=coverage.out ./...
+	@echo "👍 Done."
 
 ## dev: Starts the app in dev mode
 .PHONY: dev
 dev:
-	@echo "> Starting dev server..."
-	@modd
-
-.PHONY: install-dev
-install-dev:
-	@echo "> Installing dev dependencies..."
-	@go run dev/install.go
+	@echo "🚀 Starting dev server..."
+	@modd --file=./modd.conf
 
 ## install: Downloads all app dependencies
 .PHONY: install
-install: install-dev
-	@echo "> Installing package dependencies..."
-	@go get ./...
-	@go mod tidy
+install:
+	@echo "🛠  Installing package dependencies..."
+	@go mod download
+	@echo "👍 Done."
 
 ## serve: Builds and runs the application in production mode
-.PHONY: build
+.PHONY: serve
 serve: build
+	@echo "🚀 Starting server..."
 	GO_ENV=production ./bin/$(PROJECTNAME)
 
 ## test: Runs all tests
 .PHONY: test
 test:
-	@echo "> Running all application tests..."
-	@go test -coverprofile=coverage.out ./...
-	@echo Coverage:
-	@go tool cover -func=coverage.out
+	@echo "🏃 Running all Go tests..."
+	GO_ENV=test go test -race ./...
+	@echo "👍 Done."
 
 ## help: List available commands
 .PHONY: help
