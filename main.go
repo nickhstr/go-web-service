@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "github.com/nickhstr/goweb/logger"
 	"github.com/nickhstr/goweb/env"
 	"github.com/nickhstr/goweb/middleware"
 	"github.com/nickhstr/goweb/server" // nolint: gotype
