@@ -11,8 +11,8 @@ import (
 func main() {
 	mux := middleware.Create(middleware.Config{
 		AppName: env.AppName(),
-		AppVersion: "1.0.0",
-		GitRevision: "abc123",
+		AppVersion: env.Get("APP_VERSION"),
+		GitRevision: env.Get("GIT_COMMIT"),
 		Handler: routes.Handler(),
 		Region: env.Get("REGION"),
 	})
