@@ -13,7 +13,7 @@ func main() {
 		AppName: env.AppName(),
 		AppVersion: env.Get("APP_VERSION"),
 		GitRevision: env.Get("GIT_COMMIT"),
-		Handler: routes.Handler(),
+		Handler: routes.Router,
 		Region: env.Get("REGION"),
 	})
 

@@ -1,21 +1,21 @@
 package routes
 
 import (
-	"net/http"
-	"github.com/nickhstr/goweb/router"
-	"github.com/nickhstr/go-web-service/handlers"
+	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware" // nolint: gotype
 )
 
-// Routes maps all handlers to their appropriate Route
-var Routes = []router.Route{
-	router.Route{
-		Method:  http.MethodGet,
-		Path:    "/",
-		Handler: handlers.Index,
-	},
+// Router provides a chi router for registration of routes.
+var Router *chi.Mux
+
+func init() {
+	Router = chi.NewRouter()
+	Router.Use(middleware.StripSlashes)
+	registerRoutes()
 }
 
-// Handler creates a new router with Routes.
-func Handler() http.Handler {
-	return router.New(Routes)
+// Add route register functions here.
+func registerRoutes() {
+	Index()
+	Hello()
 }
