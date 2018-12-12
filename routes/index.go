@@ -2,11 +2,13 @@ package routes
 
 import (
 	"net/http"
+
+	"github.com/go-chi/chi"
 )
 
 // Index handles requests to the root route
-func Index() {
-	Router.Get("/", index)
+func Index(r *chi.Mux) {
+	r.Get("/", index)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {

@@ -7,9 +7,9 @@ import (
 )
 
 // Hello greets a given name.
-func Hello() {
-	Router.Get("/hello", hello)
-	Router.Get("/hello/{name:([a-z])+}", helloName)
+func Hello(r *chi.Mux) {
+	r.Get("/hello", hello)
+	r.Get("/hello/{name:([a-z])+}", helloName)
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
