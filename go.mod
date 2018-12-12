@@ -2,7 +2,7 @@ module github.com/nickhstr/go-web-service
 
 require (
 	github.com/go-chi/chi v3.3.3+incompatible
-	github.com/nickhstr/goweb v0.2.1
+	github.com/nickhstr/goweb v0.2.2
 	golang.org/x/net v0.0.0-20181207154023-610586996380 // indirect
 )
 

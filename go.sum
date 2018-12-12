@@ -15,8 +15,8 @@ github.com/joho/godotenv v1.3.0/go.mod h1:7hK45KPybAkOC6peb+G5yklZfMxEjkZhHbwpqx
 github.com/jtolds/gls v4.2.1+incompatible h1:fSuqC+Gmlu6l/ZYAoZzx2pyucC8Xza35fpRVWLVmUEE=
 github.com/jtolds/gls v4.2.1+incompatible/go.mod h1:QJZ7F/aHp+rZTRtaJ1ow/lLfFfVYBRgL+9YlvaHOwJU=
 github.com/newrelic/go-agent v2.1.0+incompatible/go.mod h1:a8Fv1b/fYhFSReoTU6HDkTYIMZeSVNffmoS726Y0LzQ=
-github.com/nickhstr/goweb v0.2.1 h1:q2cadkx9oXrGgaJIudPfz5XiTqYXytJ+a12WI89sQFk=
-github.com/nickhstr/goweb v0.2.1/go.mod h1:3kFGJfeMAW/nnv53TMAeJ7IJbaGwGRrkZm1OKlpfbi8=
+github.com/nickhstr/goweb v0.2.2 h1:6BAkwjVQ6Akpt3+1fKOg56LYwECUx17g4MBwOtHdmh8=
+github.com/nickhstr/goweb v0.2.2/go.mod h1:3kFGJfeMAW/nnv53TMAeJ7IJbaGwGRrkZm1OKlpfbi8=
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v1.7.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/gomega v1.4.3/go.mod h1:ex+gbHU/CVuBBDIJjb2X0qEXbFg53c61hWP/1CpauHY=
