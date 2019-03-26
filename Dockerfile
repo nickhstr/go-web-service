@@ -1,5 +1,5 @@
 # Stage 1 - Build app
-FROM golang:1.11.2-alpine3.8@sha256:e7462ca504afc789d289f2bb5fd471815cc11833439d2fe4e61915b190045359 as build
+FROM golang:1.12.1-alpine3.9@sha256:5f7781ceb97dd23c28f603c389d71a0ce98f9f6c78aa8cbd12b6ca836bfc6c6c as build
 
 # Install git to fetch dependencies, and install certificates to allow HTTPS requests
 RUN apk update && apk add git ca-certificates
