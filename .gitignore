@@ -209,3 +209,6 @@ $RECYCLE.BIN/
 bin
 .env
 go-web-service
+.golangci-*
+.golangcilint-*
+.gometalinter-*
