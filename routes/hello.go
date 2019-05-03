@@ -13,10 +13,16 @@ func Hello(r *chi.Mux) {
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello!"))
+	_, err := w.Write([]byte("Hello!"))
+	if err != nil {
+		panic(err)
+	}
 }
 
 func helloName(w http.ResponseWriter, r *http.Request) {
 	name := chi.URLParam(r, "name")
-	w.Write([]byte("Hello " + name + "!"))
+	_, err := w.Write([]byte("Hello " + name + "!"))
+	if err != nil {
+		panic(err)
+	}
 }
