@@ -1,8 +1,10 @@
 # Web Service Boilerplate
 Get up and running quickly with a Go web service.
 
+---
+
 ## Prerequisites
-- Go 1.11 or higher ([Installation Instructions](www.google.com))
+- Go 1.11 or higher ([Installation Instructions](https://golang.org/doc/install))
 - make
 - docker ([Installation Instructions](https://www.docker.com/get-started))
 
@@ -15,6 +17,8 @@ In a directory outside of the `$GOPATH/src` tree:
 ~$ cd go-web-service
 ~$ make install
 ```
+
+---
 
 ## Usage
 
