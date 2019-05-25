@@ -49,6 +49,7 @@ dev:
 install:
 	@echo "🛠  Installing package dependencies..."
 	@go mod download
+	@go install github.com/cortesi/modd/cmd/modd
 	@echo "👍 Done."
 
 ## serve: Builds and runs the application in production mode

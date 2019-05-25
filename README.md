@@ -3,7 +3,6 @@ Get up and running quickly with a Go web service.
 
 ## Prerequisites
 - Go 1.11 or higher ([Installation Instructions](www.google.com))
-- modd ([Installation Instructions](https://github.com/cortesi/modd/issues/57))
 - make
 - docker ([Installation Instructions](https://www.docker.com/get-started))
 
