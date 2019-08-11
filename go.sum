@@ -45,8 +45,6 @@ github.com/mattn/go-colorable v0.1.2/go.mod h1:U0ppj6V5qS13XJ6of8GYAs25YV2eR4EVc
 github.com/mattn/go-isatty v0.0.8 h1:HLtExJ+uU2HOZ+wI0Tt5DtUDrx8yhUqDcp7fYERX4CE=
 github.com/mattn/go-isatty v0.0.8/go.mod h1:Iq45c/XA43vh69/j3iqttzPXn0bhXyGjM0Hdxcsrc5s=
 github.com/newrelic/go-agent v2.10.0+incompatible/go.mod h1:a8Fv1b/fYhFSReoTU6HDkTYIMZeSVNffmoS726Y0LzQ=
-github.com/nickhstr/goweb v0.4.0 h1:aLaWQvZygw0pWf13X4LYA8H5FmOPgTcWzi5qFyAR7jA=
-github.com/nickhstr/goweb v0.4.0/go.mod h1:x3oSX3b8LxoiPrHEsX1/gv40SuEd05z2tvHlyJ8rIGc=
 github.com/nickhstr/goweb v0.6.0 h1:w9ZrE+3izFsPBsnk7Vt3tIF9DPZZEccbpNeCg0KOyTM=
 github.com/nickhstr/goweb v0.6.0/go.mod h1:x3oSX3b8LxoiPrHEsX1/gv40SuEd05z2tvHlyJ8rIGc=
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
