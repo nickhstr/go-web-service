@@ -10,7 +10,7 @@ import (
 
 func main() {
 	mux := middleware.Create(middleware.Config{
-		AppName:     env.AppName(),
+		AppName:     env.Get("APP_NAME", "web-service"),
 		AppVersion:  env.Get("APP_VERSION"),
 		GitRevision: env.Get("GIT_COMMIT"),
 		Handler:     routes.Router,
