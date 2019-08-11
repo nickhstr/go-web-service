@@ -52,6 +52,13 @@ install:
 	@go install github.com/cortesi/modd/cmd/modd
 	@echo "👍 Done."
 
+## lint: Runs golangci-lint against entire project
+.PHONY: lint
+lint:
+	@echo "🔍  Linting files..."
+	@golangci-lint run
+	@echo "👍 Done."
+
 ## serve: Builds and runs the application in production mode
 .PHONY: serve
 serve: build
