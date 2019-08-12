@@ -5,7 +5,7 @@ Get up and running quickly with a Go web service.
 
 ## Prerequisites
 - Go 1.11 or higher ([Installation Instructions](https://golang.org/doc/install))
-- make
+- golangci-lint ([Installation Instructions](https://github.com/golangci/golangci-lint#install))
 - docker ([Installation Instructions](https://www.docker.com/get-started))
 
 ## Installation
