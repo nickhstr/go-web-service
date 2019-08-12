@@ -12,6 +12,7 @@ require (
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/go-chi/chi v4.0.2+incompatible
 	github.com/google/go-cmp v0.3.0 // indirect
+	github.com/magefile/mage v1.8.0
 	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/nickhstr/goweb v0.6.0
 	github.com/rjeczalik/notify v0.9.2 // indirect
