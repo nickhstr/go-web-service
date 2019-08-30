@@ -12,6 +12,7 @@ var Router *chi.Mux
 var Routes = []func(*chi.Mux){
 	Index,
 	Hello,
+	IP,
 }
 
 func init() {
