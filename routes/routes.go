@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware" // nolint: gotype
+	"github.com/go-chi/chi/middleware"
 )
 
 // Router provides a chi router for registration of routes.
