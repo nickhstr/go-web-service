@@ -15,9 +15,7 @@ In a directory outside of the `$GOPATH/src` tree:
 ```sh
 git clone https://github.com/nickhstr/go-web-service.git
 cd go-web-service
-go get
-go install github.com/magefile/mage
-mage install
+make install
 ```
 
 ---
@@ -31,7 +29,7 @@ For local development, create a `.env` file at the project's root, with the `POR
 To start the server:
 
 ```sh
-mage dev
+make dev
 ```
 
 That will not only compile and start the server, but it will recompile and restart the app on file changes.
@@ -43,7 +41,7 @@ Ideally, docker would handle production builds.
 But to run the app in production mode locally:
 
 ```sh
-mage serve
+make serve
 ```
 
 ### Testing
@@ -51,11 +49,11 @@ mage serve
 To run all of the app's tests, and print their coverage:
 
 ```sh
-mage test
+make test
 ```
 
 To open the app's test coverage report in a browser:
 
 ```sh
-mage coverageHtml
+make coverage-html
 ```

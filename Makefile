@@ -48,7 +48,7 @@ dev:
 .PHONY: install
 install:
 	@echo "🛠  Installing package dependencies..."
-	@go mod download
+	@go get
 	@go install github.com/cortesi/modd/cmd/modd
 	@echo "👍 Done."
 
