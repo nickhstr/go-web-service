@@ -50,6 +50,7 @@ install:
 	@echo "🛠  Installing package dependencies..."
 	@go get
 	@go install github.com/cortesi/modd/cmd/modd
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint
 	@echo "👍 Done."
 
 ## lint: Runs golangci-lint against entire project

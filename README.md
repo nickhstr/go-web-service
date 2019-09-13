@@ -5,12 +5,12 @@ Get up and running quickly with a Go web service.
 
 ## Prerequisites
 - Go 1.11 or higher ([Installation Instructions](https://golang.org/doc/install))
-- golangci-lint ([Installation Instructions](https://github.com/golangci/golangci-lint#install))
+- direnv ([Installation Instructions](https://direnv.net/#basic-installation))
 - docker ([Installation Instructions](https://www.docker.com/get-started))
 
 ## Installation
 
-In a directory outside of the `$GOPATH/src` tree:
+Note: If using a go version less than 1.13, change to a directory outside of the `$GOPATH/src` tree.
 
 ```sh
 git clone https://github.com/nickhstr/go-web-service.git
@@ -56,4 +56,12 @@ To open the app's test coverage report in a browser:
 
 ```sh
 make coverage-html
+```
+
+### Linting
+
+Lint all `.go` files in the repo:
+
+```sh
+make lint
 ```
