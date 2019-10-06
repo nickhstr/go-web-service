@@ -22,11 +22,10 @@ func ipHandler(w http.ResponseWriter, r *http.Request) {
 		err error
 	)
 
-	reqURL := url.URL{
+	fc.URL = url.URL{
 		Scheme: "http",
 		Host:   "checkip.dyndns.org",
 	}
-	fc.URL = reqURL
 
 	resp, err := dal.Fetch(fc)
 	if err != nil {
