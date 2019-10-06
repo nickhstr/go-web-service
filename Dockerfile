@@ -1,5 +1,5 @@
 # Stage 1 - Build app
-FROM golang:1.12.1-alpine3.9@sha256:e0660b4f1e68e0d408420acb874b396fc6dd25e7c1d03ad36e7d6d1155a4dff6 as build
+FROM golang:1.13.1-alpine3.10@sha256:2293e952c79b8b3a987e1e09d48b6aa403d703cef9a8fa316d30ba2918d37367 as build
 
 # Install git to fetch dependencies, and install certificates to allow HTTPS requests
 RUN apk update && apk add git ca-certificates
@@ -7,7 +7,7 @@ RUN apk update && apk add git ca-certificates
 WORKDIR /app
 COPY . .
 
-RUN go mod download
+RUN go get -mod=readonly
 # Disable cgo to create build that is statically linked
 RUN CGO_ENABLED=0 go build -a -o ./bin/service ./main.go
 

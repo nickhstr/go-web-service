@@ -27,16 +27,15 @@ coverage: create-coverage
 ## coverage-html: Runs tests and opens a browser window to visualize test coverage
 .PHONY: coverage-html
 coverage-html: create-coverage
-	@echo "🛠  Opening coverage report in browser..."
+	@echo "Opening coverage report in browser..."
 	@go tool cover -html=coverage.out
-	@echo "👍 Done."
 
 ## create-coverage: Outputs test coverage to 'coverage.out'
 .PHONY: create-coverage
 create-coverage:
 	@echo "🏃 Running tests and creating coverage report..."
 	@GO_ENV=test go test -race -coverprofile=coverage.out ./...
-	@echo "👍 Done."
+	@echo "✅ Done."
 
 ## dev: Starts the app in dev mode
 .PHONY: dev
@@ -44,10 +43,9 @@ dev:
 	@echo "🚀 Starting dev server..."
 	@modd --file=./modd.conf
 
-## install: Downloads all app dependencies
+## install: Downloads/installs all app dependencies
 .PHONY: install
 install:
-	@echo "🛠  Installing package dependencies..."
 	@go get
 	@go install github.com/cortesi/modd/cmd/modd
 	@go install github.com/golangci/golangci-lint/cmd/golangci-lint
@@ -56,9 +54,9 @@ install:
 ## lint: Runs golangci-lint against entire project
 .PHONY: lint
 lint:
-	@echo "🔍  Linting files..."
+	@echo "🔍 Linting files..."
 	@golangci-lint run
-	@echo "👍 Done."
+	@echo "✨ Done."
 
 ## serve: Builds and runs the application in production mode
 .PHONY: serve
@@ -71,7 +69,7 @@ serve: build
 test:
 	@echo "🏃 Running all Go tests..."
 	GO_ENV=test go test -race ./...
-	@echo "👍 Done."
+	@echo "✅ Done."
 
 ## help: List available commands
 .PHONY: help
