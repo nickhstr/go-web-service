@@ -4,7 +4,7 @@ Get up and running quickly with a Go web service.
 ---
 
 ## Prerequisites
-- Go 1.11 or higher ([Installation Instructions](https://golang.org/doc/install))
+- Go 1.13 or higher ([Installation Instructions](https://golang.org/doc/install))
 - direnv ([Installation Instructions](https://direnv.net/#basic-installation))
 - docker ([Installation Instructions](https://www.docker.com/get-started))
 
