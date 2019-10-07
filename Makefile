@@ -41,7 +41,7 @@ create-coverage:
 .PHONY: dev
 dev:
 	@echo "🚀 Starting dev server..."
-	@modd --file=./modd.conf
+	@modd --file=./internal/tools/modd.dev.conf
 
 ## install: Downloads/installs all app dependencies
 .PHONY: install
@@ -70,6 +70,12 @@ test:
 	@echo "🏃 Running all Go tests..."
 	GO_ENV=test go test -race ./...
 	@echo "✅ Done."
+
+## test: Runs tests and watches for changes
+.PHONY: test-watch
+test-watch:
+	@echo "🏃 Running test watcher..."
+	GO_ENV=test modd --file=./internal/tools/modd.test.conf
 
 ## help: List available commands
 .PHONY: help
