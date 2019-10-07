@@ -46,9 +46,9 @@ dev:
 ## install: Downloads/installs all app dependencies
 .PHONY: install
 install:
-	@go get
-	@go install github.com/cortesi/modd/cmd/modd
-	@go install github.com/golangci/golangci-lint/cmd/golangci-lint
+	go mod download
+	go install github.com/cortesi/modd/cmd/modd
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint
 	@echo "👍 Done."
 
 ## lint: Runs golangci-lint against entire project

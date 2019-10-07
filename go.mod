@@ -1,6 +1,6 @@
 module github.com/nickhstr/go-web-service
 
-go 1.12
+go 1.13
 
 require (
 	github.com/bmatcuk/doublestar v1.1.1 // indirect
@@ -39,5 +39,5 @@ require (
 	sourcegraph.com/sqs/pbtypes v1.0.0 // indirect
 )
 
-// +heroku goVersion go1.12
+// +heroku goVersion go1.13
 // +heroku install .
