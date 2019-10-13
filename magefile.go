@@ -3,15 +3,12 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
 	"os"
-	"path/filepath"
-	"strings"
 
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
+	"github.com/nickhstr/goweb/tools"
 )
 
 var Default = Install
@@ -84,7 +81,10 @@ func Dev() error {
 
 // Installs all dependencies.
 func Install() error {
-	var err error
+	var (
+		err       error
+		toolsPath = "./internal/tools/tools.go"
+	)
 
 	fmt.Println("downloading dependencies")
 	err = sh.RunV("go", "mod", "download")
@@ -92,7 +92,14 @@ func Install() error {
 		return err
 	}
 
-	toolDeps, err := toolsToInstall("./internal/tools/tools.go")
+	f, err := tools.DepsFile(toolsPath)
+	if err != nil {
+		return err
+	}
+
+	defer f.Close()
+
+	toolDeps, err := tools.ToInstall(f)
 	if err != nil {
 		return err
 	}
@@ -173,46 +180,4 @@ func TestDev() error {
 	fmt.Println("✅ Done.")
 
 	return err
-}
-
-// toolsToInstall gets the Go tools to install from the tools.go file.
-func toolsToInstall(toolsPath string) ([]string, error) {
-	var (
-		tools  []string
-		err    error
-		done   bool
-		cutset = "\t\n_ \""
-	)
-
-	path, err := filepath.Abs(toolsPath)
-	if err != nil {
-		fmt.Printf("filepath.Abs error: %v\n", err)
-		return tools, err
-	}
-	f, err := os.Open(path)
-	if err != nil {
-		fmt.Printf("os.Open error: %v\n", err)
-		return tools, err
-	}
-
-	reader := bufio.NewReader(f)
-
-	for !done {
-		line, err := reader.ReadString('\n')
-		if err == io.EOF {
-			done = true
-		} else if err != nil {
-			fmt.Println(err)
-			done = true
-			break
-		}
-
-		// Target only lines with the name of the dependency, excluding Mage
-		if strings.Contains(line, `_ "`) && !strings.Contains(line, "magefile/mage") {
-			dep := strings.Trim(line, cutset)
-			tools = append(tools, dep)
-		}
-	}
-
-	return tools, err
 }
