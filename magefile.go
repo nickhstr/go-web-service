@@ -8,7 +8,6 @@ import (
 
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
-	"github.com/nickhstr/goweb/tools"
 )
 
 var Default = Install
@@ -76,43 +75,19 @@ func CreateCoverage() error {
 // Starts the app in dev mode.
 func Dev() error {
 	fmt.Println("🚀 Starting dev server...")
-	return sh.RunV("modd", "--file=./internal/tools/modd.dev.conf")
+	return sh.RunV("go", "run", "vendor/github.com/cortesi/modd/cmd/modd/main.go", "--file=./internal/tools/modd.dev.conf")
 }
 
 // Installs all dependencies.
 func Install() error {
-	var (
-		err       error
-		toolsPath = "./internal/tools/tools.go"
-	)
+	var err error
 
-	fmt.Println("downloading dependencies")
 	err = sh.RunV("go", "mod", "download")
 	if err != nil {
 		return err
 	}
 
-	f, err := tools.DepsFile(toolsPath)
-	if err != nil {
-		return err
-	}
-
-	defer f.Close()
-
-	toolDeps, err := tools.ToInstall(f)
-	if err != nil {
-		return err
-	}
-
-	for _, dep := range toolDeps {
-		fmt.Printf("installing %s\n", dep)
-		err = sh.RunV("go", "install", dep)
-		if err != nil {
-			return err
-		}
-	}
-
-	fmt.Println("👍 Done.")
+	err = sh.RunV("go", "mod", "vendor")
 
 	return err
 }
@@ -121,7 +96,7 @@ func Install() error {
 func Lint() error {
 	var err error
 
-	err = sh.RunV("golangci-lint", "run")
+	err = sh.RunV("go", "run", "vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/main.go", "run")
 	if err != nil {
 		return err
 	}
@@ -172,7 +147,7 @@ func TestDev() error {
 	env := map[string]string{
 		"GO_ENV": "test",
 	}
-	err = sh.RunWith(env, "modd", "--file=./internal/tools/modd.test.conf")
+	err = sh.RunWith(env, "go", "run", "vendor/github.com/cortesi/modd/cmd/modd/main.go", "--file=./internal/tools/modd.test.conf")
 	if err != nil {
 		return err
 	}
