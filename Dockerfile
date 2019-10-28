@@ -4,14 +4,20 @@ FROM golang:1.13.1-alpine3.10@sha256:2293e952c79b8b3a987e1e09d48b6aa403d703cef9a
 RUN apk update && apk add --no-cache git ca-certificates upx
 
 WORKDIR /app
+
+# Copy over files needed for `go mod download`
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+
+# Copy all source files
 COPY . .
 
-RUN go mod download
 # Disable cgo to create build that is statically linked
 RUN CGO_ENABLED=0 go build -a -o ./bin/service ./main.go && upx ./bin/service
 
 
-FROM alpine:3.10
+FROM alpine:3.10@sha256:c19173c5ada610a5989151111163d28a67368362762534d8a8121ce95cf2bd5a
 
 # Copy the executable
 COPY --from=build /app/bin/service service
