@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
@@ -15,11 +16,23 @@ var Default = Install
 const coverageOut = "coverage.out"
 const binOutput = "./bin/app"
 
-// Builds the service's executable.
+func ldflags() string {
+	gc, _ := sh.Output("git", "rev-parse", "--short", "HEAD")
+
+	flags := []string{
+		fmt.Sprintf(`-X "main.GitCommit=%s"`, gc),
+	}
+
+	return strings.Join(flags, "")
+}
+
+// Builds the app's executable.
 func Build() error {
-	fmt.Println("🛠️  Building executable...")
-	err := sh.RunV("go", "build", "-o", binOutput, "./main.go")
-	fmt.Println("👍 Done.")
+	mg.Deps(Clean)
+
+	fmt.Println("🚧 Building executable...")
+	err := sh.RunV("go", "build", "-o", binOutput, "-ldflags="+ldflags(), "main.go")
+	fmt.Println("✨ Done.")
 
 	return err
 }
@@ -36,8 +49,8 @@ func Clean() error {
 // Runs all tests and reports coverage.
 func Coverage() error {
 	var err error
-
 	mg.Deps(CreateCoverage)
+
 	fmt.Println("=============================== Coverage summary ===============================")
 
 	err = sh.RunV("go", "tool", "cover", "-func", coverageOut)
@@ -53,6 +66,7 @@ func Coverage() error {
 // Opens coverage report in a browser.
 func CoverageHtml() error {
 	mg.Deps(CreateCoverage)
+
 	fmt.Println("📊 Opening coverage report in browser...")
 
 	return sh.Run("go", "tool", "cover", "-html", coverageOut)
@@ -72,9 +86,8 @@ func CreateCoverage() error {
 	return err
 }
 
-// Starts the app in dev mode.
+// Starts the app and restarts on changes.
 func Dev() error {
-	fmt.Println("🚀 Starting dev server...")
 	return sh.RunV("go", "run", "vendor/github.com/cortesi/modd/cmd/modd/main.go", "--file=./internal/tools/modd.dev.conf")
 }
 
@@ -82,12 +95,14 @@ func Dev() error {
 func Install() error {
 	var err error
 
+	fmt.Println("📡 Downloading dependencies...")
 	err = sh.RunV("go", "mod", "download")
 	if err != nil {
 		return err
 	}
 
 	err = sh.RunV("go", "mod", "vendor")
+	fmt.Println("✨ Done.")
 
 	return err
 }
@@ -96,6 +111,7 @@ func Install() error {
 func Lint() error {
 	var err error
 
+	fmt.Println("🔍 Linting files...")
 	err = sh.RunV("go", "run", "vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/main.go", "run")
 	if err != nil {
 		return err
@@ -109,6 +125,7 @@ func Lint() error {
 // Builds and runs the application.
 func Serve() error {
 	mg.Deps(Build)
+
 	fmt.Println("🚀 Starting server...")
 	err := sh.RunV(binOutput)
 
@@ -138,21 +155,7 @@ func Test() error {
 
 // Runs all tests, and watches for changes.
 func TestDev() error {
-	var err error
-
-	fmt.Println("🏃 Running all Go tests...")
-	// Set verbose env var to get test output
-	// Needed until next release of Mage
-	os.Setenv(mg.VerboseEnv, "true")
-	env := map[string]string{
-		"GO_ENV": "test",
-	}
-	err = sh.RunWith(env, "go", "run", "vendor/github.com/cortesi/modd/cmd/modd/main.go", "--file=./internal/tools/modd.test.conf")
-	if err != nil {
-		return err
-	}
-
-	fmt.Println("✅ Done.")
+	err := sh.RunV("go", "run", "vendor/github.com/cortesi/modd/cmd/modd/main.go", "--file=./internal/tools/modd.test.conf")
 
 	return err
 }
