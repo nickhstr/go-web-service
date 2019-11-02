@@ -1,4 +1,4 @@
-FROM golang:1.13.1-alpine3.10@sha256:2293e952c79b8b3a987e1e09d48b6aa403d703cef9a8fa316d30ba2918d37367 as build
+FROM golang:1.13.4-alpine3.10@sha256:9d2a7c5b6447f525da0a4f18efd2cb05bf7d70228f75d713b7a67345f30157ac as build
 
 # Install git to fetch dependencies, install certificates to allow HTTPS requests, and install upx to compress executable
 RUN apk update && apk add --no-cache git ca-certificates upx
