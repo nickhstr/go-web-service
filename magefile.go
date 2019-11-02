@@ -11,20 +11,13 @@ import (
 	"github.com/magefile/mage/sh"
 )
 
+// The default target
 var Default = Install
 
 const coverageOut = "coverage.out"
 const binOutput = "./bin/app"
 
-func ldflags() string {
-	gc, _ := sh.Output("git", "rev-parse", "--short", "HEAD")
-
-	flags := []string{
-		fmt.Sprintf(`-X "main.GitCommit=%s"`, gc),
-	}
-
-	return strings.Join(flags, "")
-}
+//---------- Targets ----------//
 
 // Builds the app's executable.
 func Build() error {
@@ -158,4 +151,34 @@ func TestDev() error {
 	err := sh.RunV("go", "run", "vendor/github.com/cortesi/modd/cmd/modd/main.go", "--file=./internal/tools/modd.test.conf")
 
 	return err
+}
+
+//---------- Non-target functions ----------//
+
+func ldflags() string {
+	// Add build-time variables here
+	flags := []string{
+		fmt.Sprintf(`-X "main.gitCommit=%s"`, commitHash()),
+		fmt.Sprintf(`-X "main.appVersion=%s"`, version()),
+	}
+
+	return strings.Join(flags, "")
+}
+
+func commitHash() string {
+	ch, err := sh.Output("git", "rev-parse", "--short", "HEAD")
+	if err != nil {
+		ch = "<not set>"
+	}
+
+	return ch
+}
+
+func version() string {
+	v, err := sh.Output("git", "describe", "--tags")
+	if err != nil {
+		v = "1.0.0"
+	}
+
+	return v
 }

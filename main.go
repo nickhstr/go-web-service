@@ -7,17 +7,18 @@ import (
 	"github.com/nickhstr/goweb/server"
 )
 
-var GitCommit = "<not set>"
+var gitCommit = "<not set>"
+var appVersion = "<not set>"
 
 func main() {
 	mux := middleware.Create(middleware.Config{
 		AppName:    env.Get("APP_NAME", "web-service"),
-		AppVersion: env.Get("APP_VERSION"),
+		AppVersion: appVersion,
 		EnvVarsToValidate: []string{
 			"APP_NAME",
 			"GO_ENV",
 		},
-		GitRevision: GitCommit,
+		GitRevision: gitCommit,
 		Handler:     routes.Router,
 		Region:      env.Get("REGION"),
 	})
