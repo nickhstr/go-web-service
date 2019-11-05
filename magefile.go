@@ -24,7 +24,7 @@ func Build() error {
 	mg.Deps(Clean)
 
 	fmt.Println("🚧 Building executable...")
-	err := sh.RunV("go", "build", "-o", binOutput, "-ldflags="+ldflags(), "main.go")
+	err := sh.RunV("go", "build", "-o", binOutput, "-ldflags", ldflags(), "main.go")
 	fmt.Println("✨ Done.")
 
 	return err
@@ -158,11 +158,11 @@ func TestDev() error {
 func ldflags() string {
 	// Add build-time variables here
 	flags := []string{
-		fmt.Sprintf(`-X "main.gitCommit=%s"`, commitHash()),
-		fmt.Sprintf(`-X "main.appVersion=%s"`, version()),
+		fmt.Sprintf("-X main.gitCommit=%s", commitHash()),
+		fmt.Sprintf("-X main.appVersion=%s", version()),
 	}
 
-	return strings.Join(flags, "")
+	return strings.Join(flags, " ")
 }
 
 func commitHash() string {
