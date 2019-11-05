@@ -88,7 +88,7 @@ func Dev() error {
 func Install() error {
 	var err error
 
-	fmt.Println("📡 Downloading dependencies...")
+	fmt.Println("🚚 Downloading dependencies...")
 	err = sh.RunV("go", "mod", "download")
 	if err != nil {
 		return err
