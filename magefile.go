@@ -175,7 +175,7 @@ func commitHash() string {
 }
 
 func version() string {
-	v, err := sh.Output("git", "describe", "--tags")
+	v, err := sh.Output("git", "describe", "--abbrev=0", "--always")
 	if err != nil {
 		v = "1.0.0"
 	}
