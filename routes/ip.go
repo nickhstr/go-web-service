@@ -2,7 +2,6 @@ package routes
 
 import (
 	"net/http"
-	"net/url"
 	"regexp"
 
 	"github.com/go-chi/chi"
@@ -17,17 +16,9 @@ func IP(r *chi.Mux) {
 }
 
 func ipHandler(w http.ResponseWriter, r *http.Request) {
-	var (
-		fc  dal.FetchConfig
-		err error
-	)
+	var err error
 
-	fc.URL = url.URL{
-		Scheme: "http",
-		Host:   "checkip.dyndns.org",
-	}
-
-	resp, err := dal.Fetch(fc)
+	resp, err := dal.Get("http://checkip.dyndns.org")
 	if err != nil {
 		resp = []byte(err.Error())
 		writeIPResponse(w, resp)
