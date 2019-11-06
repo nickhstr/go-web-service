@@ -18,6 +18,7 @@ func main() {
 			"APP_NAME",
 			"GO_ENV",
 		},
+		Etag:        true,
 		GitRevision: gitCommit,
 		Handler:     routes.Router,
 		Region:      env.Get("REGION"),
