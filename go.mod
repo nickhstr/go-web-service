@@ -13,7 +13,7 @@ require (
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/magefile/mage v1.9.0
 	github.com/magiconair/properties v1.8.1 // indirect
-	github.com/nickhstr/goweb v0.15.0
+	github.com/nickhstr/goweb v0.15.1
 	github.com/pelletier/go-toml v1.4.0 // indirect
 	github.com/rjeczalik/notify v0.9.2 // indirect
 	github.com/spf13/afero v1.2.2 // indirect
