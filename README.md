@@ -1,5 +1,3 @@
-[![built with mage](https://magefile.org/badge.svg)](https://magefile.org/)
-
 # Web Service Boilerplate
 Get up and running quickly with a Go web service.
 
