@@ -16,7 +16,6 @@ Get up and running quickly with a Go web service.
 ## Prerequisites
 - Go 1.13 or higher ([Installation Instructions](https://golang.org/doc/install))
   - For macOS, `brew` works well
-- Mage: [see installation below](#installation)
 - docker ([Installation Instructions](https://www.docker.com/get-started))
 
 ## Installation
@@ -24,8 +23,7 @@ Get up and running quickly with a Go web service.
 ```sh
 git clone https://github.com/nickhstr/go-web-service.git
 cd go-web-service
-go install github.com/magefile/mage
-mage
+make
 ```
 
 ---
@@ -39,7 +37,7 @@ For local development, create a `.env` file at the project's root, with the `POR
 To start the server:
 
 ```sh
-mage dev
+make dev
 ```
 
 That will not only compile and start the server, but it will recompile and restart the app on file changes.
@@ -49,18 +47,18 @@ That will not only compile and start the server, but it will recompile and resta
 To run all of the app's tests, and print their coverage:
 
 ```sh
-mage test
+make test
+```
+
+To run all tests, and watch for changes:
+```sh
+make testDev
 ```
 
 To open the app's test coverage report in a browser:
 
 ```sh
-mage coverageHtml
-```
-
-To run all tests, and watch for changes:
-```sh
-mage testDev
+make coverageHtml
 ```
 
 ### Linting
@@ -68,5 +66,5 @@ mage testDev
 Lint all `.go` files in the repo:
 
 ```sh
-mage lint
+make lint
 ```
