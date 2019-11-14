@@ -16,24 +16,15 @@ func IP(r *chi.Mux) {
 }
 
 func ipHandler(w http.ResponseWriter, r *http.Request) {
-	var err error
+	w.Header().Set("Content-Type", "text/plain")
 
 	resp, err := dal.Get("http://checkip.dyndns.org")
 	if err != nil {
 		resp = []byte(err.Error())
-		writeIPResponse(w, resp)
+		_, _ = w.Write(resp)
 		return
 	}
 
 	ipAddress := ipRegex.Find(resp)
-	writeIPResponse(w, ipAddress)
-}
-
-func writeIPResponse(w http.ResponseWriter, resp []byte) {
-	w.Header().Set("Content-Type", "text/plain")
-	w.WriteHeader(http.StatusOK)
-	_, err := w.Write(resp)
-	if err != nil {
-		panic(err)
-	}
+	_, _ = w.Write(ipAddress)
 }
