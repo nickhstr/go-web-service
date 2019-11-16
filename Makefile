@@ -1,4 +1,9 @@
 PROJECTNAME ?= ${shell basename "${PWD}"}
+# try to use globally installed linter to take advantage of cache
+LINTER = golangci-lint
+ifeq (, ${shell which golangci-lint})
+LINTER = go run vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/main.go
+endif
 
 # First target, is the default command run if 'make' is invoked without any targets
 all: install
@@ -60,7 +65,7 @@ install:
 .PHONY: lint
 lint:
 	@echo "🔍 Linting files..."
-	go run vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/main.go run ${flags}
+	${LINTER} run ${flags}
 	@echo "✨ Done."
 
 ## serve: Builds and runs the application in production mode
