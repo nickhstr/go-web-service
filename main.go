@@ -15,21 +15,19 @@ var appVersion = "<not set>"
 func main() {
 	log := logger.New("go-web-service")
 
-	handler := middleware.Compose(
-		routes.Router,
-		// Add additional middleware here
-		cors.Default().Handler,
-	)
 	mux := middleware.Create(middleware.Config{
-		AppName:    "go-web-service",
-		AppVersion: appVersion,
 		EnvVarsToValidate: []string{
 			"GO_ENV",
 		},
+		AppName:     "go-web-service",
+		AppVersion:  appVersion,
 		Etag:        true,
 		GitRevision: gitCommit,
-		Handler:     handler,
 		Region:      env.Get("REGION"),
+		Handler: middleware.Compose(
+			routes.Router,
+			cors.Default().Handler,
+		),
 	})
 
 	if err := server.Start(mux); err != nil {
