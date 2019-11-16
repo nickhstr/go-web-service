@@ -5,22 +5,27 @@ import (
 	"github.com/nickhstr/goweb/env"
 	"github.com/nickhstr/goweb/middleware"
 	"github.com/nickhstr/goweb/server"
+	"github.com/rs/cors"
 )
 
 var gitCommit = "<not set>"
 var appVersion = "<not set>"
 
 func main() {
+	handler := middleware.Compose(
+		routes.Router,
+		// Add additional middleware here
+		cors.Default().Handler,
+	)
 	mux := middleware.Create(middleware.Config{
-		AppName:    env.Get("APP_NAME", "web-service"),
+		AppName:    "go-web-service",
 		AppVersion: appVersion,
 		EnvVarsToValidate: []string{
-			"APP_NAME",
 			"GO_ENV",
 		},
 		Etag:        true,
 		GitRevision: gitCommit,
-		Handler:     routes.Router,
+		Handler:     handler,
 		Region:      env.Get("REGION"),
 	})
 
