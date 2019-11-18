@@ -1,9 +1,19 @@
+# VARIABLES
+
 PROJECTNAME ?= ${shell basename "${PWD}"}
+
 # try to use globally installed linter to take advantage of cache
 LINTER = golangci-lint
 ifeq (, ${shell which golangci-lint})
 LINTER = go run vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/main.go
 endif
+
+MODD = modd
+ifeq (, ${shell which modd})
+MODD = go run vendor/github.com/cortesi/modd/cmd/modd/main.go
+endif
+
+# TARGETS
 
 # First target, is the default command run if 'make' is invoked without any targets
 all: install
@@ -51,7 +61,7 @@ create-coverage:
 .PHONY: dev
 dev:
 	@echo "🚀 Starting dev server..."
-	@go run vendor/github.com/cortesi/modd/cmd/modd/main.go --file=./internal/tools/modd.dev.conf
+	${MODD} --file=./internal/tools/modd.dev.conf
 
 ## install: Downloads/installs all app dependencies
 .PHONY: install
@@ -87,7 +97,7 @@ test:
 .PHONY: test-watch
 test-watch:
 	@echo "🏃 Running test watcher..."
-	@go run vendor/github.com/cortesi/modd/cmd/modd/main.go --file=./internal/tools/modd.test.conf
+	${MODD} --file=./internal/tools/modd.test.conf
 
 ## help: List available commands
 .PHONY: help
