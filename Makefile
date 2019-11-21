@@ -24,7 +24,7 @@ build:
 # assign build-time variables
 	${eval commit := ${shell git rev-parse --short HEAD}}
 	${eval version := ${shell git describe --abbrev=0 --always}}
-	${eval output ?= bin/app}
+	${eval output ?= bin/${PROJECTNAME}}
 
 	@echo "🚧 Building executable..."
 	@go build -o ${output} -ldflags "-X main.gitCommit=${commit} -X main.appVersion=${version}" main.go
