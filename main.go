@@ -1,9 +1,6 @@
 package main
 
 import (
-	"net/http"
-	_ "net/http/pprof"
-
 	"github.com/nickhstr/go-web-service/routes"
 	"github.com/nickhstr/goweb/env"
 	"github.com/nickhstr/goweb/logger"
@@ -24,22 +21,20 @@ func main() {
 		},
 		AppName:     "go-web-service",
 		AppVersion:  appVersion,
+		Auth:        true,
 		Etag:        true,
 		GitRevision: gitCommit,
 		Region:      env.Get("REGION"),
+		WhiteList: []string{
+			`^/$`,
+			`^/go-web-service/health$`,
+			`^/debug/pprof.*`,
+		},
 		Handler: middleware.Compose(
 			routes.Router,
 			cors.Default().Handler,
 		),
 	})
-
-	if env.Get("GO_ENV") == "debug" {
-		go func() {
-			if err := http.ListenAndServe(":6060", nil); err != nil {
-				log.Fatal().Err(err).Msg("failed to start debug server")
-			}
-		}()
-	}
 
 	if err := server.Start(mux); err != nil {
 		log.Fatal().Err(err).Msg("failed to start server")
