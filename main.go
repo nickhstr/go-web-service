@@ -22,6 +22,7 @@ func main() {
 		AppName:     "go-web-service",
 		AppVersion:  appVersion,
 		Auth:        true,
+		Debug:       true,
 		Etag:        true,
 		GitRevision: gitCommit,
 		Region:      env.Get("REGION"),

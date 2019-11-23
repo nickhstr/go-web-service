@@ -9,7 +9,6 @@ var Router *chi.Mux
 
 // Routes holds all routes to be registered to Router.
 var Routes = []func(*chi.Mux){
-	Debug,
 	Index,
 	Hello,
 	IP,
