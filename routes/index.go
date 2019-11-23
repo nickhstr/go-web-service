@@ -13,8 +13,5 @@ func Index(r *chi.Mux) {
 
 func index(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
-	_, err := w.Write([]byte("Hello World!"))
-	if err != nil {
-		panic(err)
-	}
+	_, _ = w.Write([]byte("Ok"))
 }
