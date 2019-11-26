@@ -208,8 +208,8 @@ github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32/go.mod h1:9wM+0iRr9ahx58uY
 github.com/nbutton23/zxcvbn-go v0.0.0-20180912185939-ae427f1e4c1d h1:AREM5mwr4u1ORQBMvzfzBgpsctsbQikCVpvC+tX285E=
 github.com/nbutton23/zxcvbn-go v0.0.0-20180912185939-ae427f1e4c1d/go.mod h1:o96djdrsSGy3AWPyBgZMAGfxZNfgntdJG+11KU4QvbU=
 github.com/newrelic/go-agent v2.15.0+incompatible/go.mod h1:a8Fv1b/fYhFSReoTU6HDkTYIMZeSVNffmoS726Y0LzQ=
-github.com/nickhstr/goweb v0.19.1 h1:JnyA2G9AXjFoNFaO4ZTth/am4dJ1qhHdV7qT2VXOmEs=
-github.com/nickhstr/goweb v0.19.1/go.mod h1:/EAGS9iAEAgRhFvTDhCght9CBnkTHy1jpeNWNNIl3mo=
+github.com/nickhstr/goweb v0.19.2 h1:xybuQAx6uLKczYnCZ7tvtngyxOUnc0Ci3y61u3ZchbQ=
+github.com/nickhstr/goweb v0.19.2/go.mod h1:/EAGS9iAEAgRhFvTDhCght9CBnkTHy1jpeNWNNIl3mo=
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v1.10.1 h1:q/mM8GF/n0shIN8SaAZ0V+jnLPzen6WIVZdiwrRlMlo=
