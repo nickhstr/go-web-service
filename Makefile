@@ -27,7 +27,7 @@ build:
 	${eval output ?= bin/${PROJECTNAME}}
 
 	@echo "🚧 Building executable..."
-	@go build -o ${output} -ldflags "-X main.gitCommit=${commit} -X main.appVersion=${version}" main.go
+	@go build -o ${output} -ldflags "-X main.gitCommit=${commit} -X main.appVersion=${version}" ${flags} main.go
 	@echo "✨ Done."
 
 ## clean: Removes build artifacts
