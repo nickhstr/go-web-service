@@ -50,13 +50,13 @@ make test
 
 To run all tests, and watch for changes:
 ```sh
-make testDev
+make test-watch
 ```
 
 To open the app's test coverage report in a browser:
 
 ```sh
-make coverageHtml
+make coverage-html
 ```
 
 ### Linting
