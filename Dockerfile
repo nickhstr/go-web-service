@@ -35,5 +35,5 @@ ENV GO_ENV=production \
   PORT=3000
 
 EXPOSE 3000
-CMD ["./service"]
+CMD ["GO_ENV=production", "./service"]
 
