@@ -1,15 +1,19 @@
 # VARIABLES
 
-PROJECTNAME ?= ${shell basename "${PWD}"}
+PROJECTNAME ?= $(shell basename "$(PWD)")
+COMMIT := $(shell git rev-parse --short HEAD)
+VERSION := $(shell git describe --abbrev=0 --always)
+LDFLAGS ?= -ldflags "-X main.gitCommit=$(COMMIT) -X main.appVersion=$(VERSION)"
+OUTPUT ?= bin/$(PROJECTNAME)
 
 # try to use globally installed linter to take advantage of cache
 LINTER = golangci-lint
-ifeq (, ${shell which golangci-lint})
+ifeq (, $(shell which golangci-lint))
 LINTER = go run vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/main.go
 endif
 
 MODD = modd
-ifeq (, ${shell which modd})
+ifeq (, $(shell which modd))
 MODD = go run vendor/github.com/cortesi/modd/cmd/modd/main.go
 endif
 
@@ -21,14 +25,16 @@ all: install
 ## build: Builds the app's executable
 .PHONY: build
 build:
-# assign build-time variables
-	${eval commit := ${shell git rev-parse --short HEAD}}
-	${eval version := ${shell git describe --abbrev=0 --always}}
-	${eval output ?= bin/${PROJECTNAME}}
-
 	@echo "🚧 Building executable..."
-	@go build -o ${output} -ldflags "-X main.gitCommit=${commit} -X main.appVersion=${version}" ${flags} main.go
+	go build -o $(OUTPUT) $(LDFLAGS) $(flags) main.go
 	@echo "✨ Done."
+
+## build-prod: Builds the app in a way most suitable for production
+.PHONY: build-prod
+build-prod:
+# Disable cgo to create build that is statically linked
+	CGO_ENABLED=0 make build
+	upx $(OUTPUT)
 
 ## clean: Removes build artifacts
 .PHONY: clean
@@ -61,7 +67,7 @@ create-coverage:
 .PHONY: dev
 dev:
 	@echo "🚀 Starting dev server..."
-	${MODD} --file=./internal/tools/modd.dev.conf
+	$(MODD) --file=./internal/tools/modd.dev.conf
 
 ## install: Downloads/installs all app dependencies
 .PHONY: install
@@ -75,35 +81,35 @@ install:
 .PHONY: lint
 lint:
 	@echo "🔍 Linting files..."
-	${LINTER} run ${flags}
+	$(LINTER) run $(flags)
 	@echo "✨ Done."
 
 ## serve: Builds and runs the application in production mode
 .PHONY: serve
 serve: build
 	@echo "🚀 Starting server..."
-	@./${output}
+	@./$(OUTPUT)
 
 ## test: Runs all tests
 .PHONY: test
 test:
-	${eval flags ?= -race}
-	${eval packages ?= ./...}
+	$(eval flags ?= -race)
+	$(eval packages ?= ./...)
 	@echo "🏃 Running all Go tests..."
-	GO_ENV=test go test ${flags} ${packages}
+	GO_ENV=test go test $(flags) $(packages)
 	@echo "✅ Done."
 
 ## test-watch: Runs tests and watches for changes
 .PHONY: test-watch
 test-watch:
 	@echo "🏃 Running test watcher..."
-	${MODD} --file=./internal/tools/modd.test.conf
+	$(MODD) --file=./internal/tools/modd.test.conf
 
 ## help: List available commands
 .PHONY: help
 help: Makefile
 	@echo
-	@echo " Choose a command to run in "${PROJECTNAME}":"
+	@echo " Choose a command to run in "$(PROJECTNAME)":"
 	@echo
 	@sed -n 's/^##//p' $< | column -t -s ':' |  sed -e 's/^/  /'
 	@echo
