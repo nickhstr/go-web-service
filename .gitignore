@@ -212,3 +212,4 @@ go-web-service
 .golangci-*
 .golangcilint-*
 .gometalinter-*
+__debug_bin
