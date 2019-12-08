@@ -34,6 +34,5 @@ COPY --from=build /etc/ssl/ /etc/ssl/
 ENV GO_ENV=production \
   PORT=3000
 
-EXPOSE 3000
-CMD ["GO_ENV=production", "./service"]
-
+EXPOSE $PORT
+CMD ["./service"]
