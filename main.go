@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/nickhstr/go-web-service/routes"
+	"github.com/nickhstr/goweb/dnscache"
 	"github.com/nickhstr/goweb/env"
 	"github.com/nickhstr/goweb/logger"
 	"github.com/nickhstr/goweb/middleware"
@@ -37,7 +38,9 @@ func main() {
 		),
 	})
 
-	if err := server.Start(mux); err != nil {
+	dnscache.Enable(300)
+
+	if err := server.StartNew(mux); err != nil {
 		log.Fatal().Err(err).Msg("failed to start server")
 	}
 }
