@@ -1,6 +1,8 @@
 package main
 
 import (
+	"strconv"
+
 	"github.com/nickhstr/go-web-service/routes"
 	"github.com/nickhstr/goweb/dnscache"
 	"github.com/nickhstr/goweb/env"
@@ -38,7 +40,9 @@ func main() {
 		),
 	})
 
-	dnscache.Enable(300)
+	// enable DNS caching
+	dnsTTL, _ := strconv.Atoi(env.Get("DNSCACHE_TTL", "300"))
+	dnscache.Enable(dnsTTL)
 
 	if err := server.StartNew(mux); err != nil {
 		log.Fatal().Err(err).Msg("failed to start server")
