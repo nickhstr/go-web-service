@@ -3,15 +3,15 @@ package routes
 import (
 	"net/http"
 
-	"github.com/go-chi/chi"
+	"github.com/gorilla/mux"
+	"github.com/nickhstr/goweb/write"
 )
 
 // Index handles requests to the root route
-func Index(r *chi.Mux) {
-	r.Get("/", index)
+func Index(r *mux.Router) {
+	r.HandleFunc("/", index)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/plain")
-	_, _ = w.Write([]byte("Ok"))
+	write.OK(w)
 }
