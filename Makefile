@@ -6,16 +6,8 @@ VERSION := $(shell git describe --abbrev=0 --always)
 LDFLAGS ?= -ldflags "-X main.gitCommit=$(COMMIT) -X main.appVersion=$(VERSION)"
 OUTPUT ?= bin/$(PROJECTNAME)
 
-# try to use globally installed linter to take advantage of cache
-LINTER = golangci-lint
-ifeq (, $(shell which golangci-lint))
-LINTER = go run vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/main.go
-endif
-
-MODD = modd
-ifeq (, $(shell which modd))
-MODD = go run vendor/github.com/cortesi/modd/cmd/modd/main.go
-endif
+export GOBIN = $(CURDIR)/bin
+export PATH := $(GOBIN):$(PATH)
 
 # TARGETS
 
@@ -67,22 +59,33 @@ create-coverage:
 .PHONY: dev
 dev:
 	@echo "🚀 Starting dev server..."
-	$(MODD) --file=./internal/tools/modd.dev.conf
+	@modd --file=./internal/tools/modd.dev.conf
 
 ## install: Downloads/installs all app dependencies
 .PHONY: install
 install:
 	@echo "🚚 Downloading dependencies..."
 	@go mod download
-	@go mod vendor
+
+	@echo "🛠  Building Go dependencies..."
+	@go install github.com/cortesi/modd/cmd/modd
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint
+	@go install github.com/psampaz/go-mod-outdated
 	@echo "✨ Done."
 
-## lint: Runs golangci-lint against entire project
+## lint: Runs linter against Go files
 .PHONY: lint
 lint:
-	@echo "🔍 Linting files..."
-	$(LINTER) run $(flags)
+	@echo "🔍 Linting Go files..."
+	@golangci-lint run $(flags)
+	@go mod tidy
+	@git diff --exit-code -- go.mod go.sum
 	@echo "✨ Done."
+
+## mod-outdated: Checks for updates to direct go.mod dependencies
+.PHONY: mod-outdated
+mod-outdated:
+	@go list -u -m -json all | go-mod-outdated -update -direct
 
 ## serve: Builds and runs the application in production mode
 .PHONY: serve
@@ -103,7 +106,7 @@ test:
 .PHONY: test-watch
 test-watch:
 	@echo "🏃 Running test watcher..."
-	$(MODD) --file=./internal/tools/modd.test.conf
+	@modd --file=./internal/tools/modd.test.conf
 
 ## help: List available commands
 .PHONY: help
